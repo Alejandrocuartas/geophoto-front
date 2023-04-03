@@ -1,14 +1,12 @@
 import * as React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
+import Main from "./pages/Main";
 const App = () => {
     return (
-        <BrowserRouter>
-            <Layout>
-                <Routes>
-                </Routes>
-            </Layout>
-        </BrowserRouter>
+        <Layout>
+            <Main></Main>
+        </Layout>
     );
 };
 
