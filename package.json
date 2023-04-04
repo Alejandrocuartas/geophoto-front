@@ -4,8 +4,8 @@
     "description": "",
     "main": "./src/index.tsx",
     "scripts": {
-        "start": "webpack serve --env API=localhost:3000 --mode development --env development",
-        "build": "webpack --env API=app.onrender.com --mode production"
+        "start": "webpack serve --env API=localhost:3000 PROTOCOL=http --mode development --env development",
+        "build": "webpack --env API=geophotoservice.onrender.com PROTOCOL=https --mode production"
     },
     "keywords": [],
     "author": "Alejandro Cuartas <cuartasmarin734@gmail.com>",

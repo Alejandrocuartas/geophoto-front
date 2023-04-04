@@ -8,7 +8,7 @@ import App from "./App";
 import { Context } from "./context";
 
 const client = new ApolloClient({
-    uri: `http://${process.env.API}/query`,
+    uri: `${process.env.PROTOCOL}://${process.env.API}/query`,
     cache: new InMemoryCache(),
 });
 

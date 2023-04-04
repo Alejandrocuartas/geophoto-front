@@ -50,6 +50,7 @@ module.exports = (env) => {
                     env: {
                         ...env,
                         API: env.API,
+                        PROTOCOL: env.PROTOCOL
                     },
                 }),
             })
