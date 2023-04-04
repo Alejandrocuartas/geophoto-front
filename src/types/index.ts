@@ -21,12 +21,14 @@ export type UserRegistration = {
     jwt: string;
 };
 
-type Photo = {
+export type Photo = {
     id: string;
     url: string;
     location: LocationGeo;
     user: User;
 };
+
+export type NewPhotoRes = { data: { newPhoto: Photo } }
 
 type LocationGeo = {
     type: string;
@@ -37,7 +39,7 @@ export type NewPhoto = {
     url: string;
     lat: string;
     long: string;
-    userId?: string;
+    userId: string;
 };
 
 export type GlobalContext = {
@@ -45,4 +47,7 @@ export type GlobalContext = {
     setLogged: Dispatch<SetStateAction<boolean>>;
     user: UserRegistration;
     setUser: Dispatch<SetStateAction<UserRegistration>>;
+    socket: WebSocket;
+    photos: Photo[];
+    setPhotos: Dispatch<SetStateAction<Photo[]>>;
 }

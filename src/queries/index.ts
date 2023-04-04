@@ -36,3 +36,20 @@ export const NEW_PHOTO_MUTATION = gql`
     }
   }
 `;
+
+export const PHOTOS_QUERY = gql`
+  query Query($lat: String!, $long: String!) {
+    photos(lat: $lat, long: $long) {
+      id
+      url
+      location {
+        type
+        coordinates
+      }
+      user {
+        id
+        username
+      }
+    }
+  }
+`;

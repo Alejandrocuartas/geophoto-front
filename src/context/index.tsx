@@ -1,16 +1,21 @@
 import React, { useState, createContext, useContext } from "react";
-import { GlobalContext } from "../types";
+import { GlobalContext, Photo } from "../types";
+const socket = new WebSocket(`ws://${process.env.API}/ws`)
 //@ts-ignore
 const logContext = createContext<GlobalContext>();
 const Context = ({ children }: { children: JSX.Element }) => {
     const [logged, setLogged] = useState(false)
     const [user, setUser] = useState({ username: "", id: "", jwt: "" })
+    const [photos, setPhotos] = useState<Photo[]>([])
     return (
         <logContext.Provider value={{
             logged,
             setLogged,
             user,
-            setUser
+            setUser,
+            socket,
+            photos,
+            setPhotos
         }}>
             {children}
         </logContext.Provider>

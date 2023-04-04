@@ -5,10 +5,9 @@ import Modal from 'react-bootstrap/Modal';
 import { useMutation } from '@apollo/client';
 import { NEW_PHOTO_MUTATION } from '../queries';
 import { useGlobalState } from '../context';
-import { NewPhoto } from '../types';
-
+import { NewPhoto, NewPhotoRes } from '../types';
 const NewPhotoModal = ({ show, handleClose, isOpen }: { show: any, handleClose: any, isOpen: boolean }) => {
-    const { user } = useGlobalState()
+    const { user, socket } = useGlobalState()
     const [loading, setLoading] = useState(false)
     const [NP] = useMutation(NEW_PHOTO_MUTATION, {
         context: {
@@ -45,18 +44,25 @@ const NewPhotoModal = ({ show, handleClose, isOpen }: { show: any, handleClose: 
                     input: {
                         lat: String(position.coords.latitude),
                         long: String(position.coords.longitude),
-                        url
+                        url,
+                        userId: user.id
                     }
                 }
-                console.log(position.coords.latitude, position.coords.longitude);
                 try {
-                    const data = await NP({ variables })
+                    //@ts-ignore
+                    const res: NewPhotoRes = await NP({ variables })
                     setLoading(false)
-                    console.log(data)
+                    socket.send(JSON.stringify(res.data.newPhoto))
                     handleClose()
-                } catch (error) {
+                } catch (error: any) {
                     setLoading(false)
-                    console.log(error)
+                    if (error.message === "error authentication") {
+                        alert("Must be logged in.")
+                        window.localStorage.removeItem("session")
+                        location.reload()
+                    } else {
+                        alert("unexpected error: " + error.message)
+                    }
                     handleClose()
                 }
 
