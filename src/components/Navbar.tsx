@@ -1,14 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { BiImageAdd } from 'react-icons/Bi'
+import { useGlobalState } from '../context';
 
 import './styles/Navbar.css'
+import LoginModal from './LoginModal';
+import SignupModal from './SignupModal';
+import NewPhotoModal from './NewPhotoModal';
 
-function NavBar() {
+const NavBar = () => {
+  const { logged, user } = useGlobalState()
+  const [isOpenLogin, setOpenLogin] = useState(false)
+  const [isOpenSignup, setOpenSignup] = useState(false)
+  const [isOpenNewPhoto, setOpenNewPhoto] = useState(false)
+  const openLogin = () => {
+    setOpenLogin(true)
+  }
+  const openSignup = () => {
+    setOpenSignup(true)
+  }
+  const openNewPhoto = () => {
+    if (!logged) {
+      return alert("Please Sign Up.")
+    }
+    setOpenNewPhoto(true)
+  }
   return (
     <Navbar className='bg-default' expand="lg">
       <Container fluid>
@@ -22,34 +43,31 @@ function NavBar() {
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            <Nav.Link href="#action1">Home</Nav.Link>
-            <Nav.Link href="#action2">Link</Nav.Link>
-            <NavDropdown title="Link" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action4">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action5">
-                Something else here
-              </NavDropdown.Item>
-            </NavDropdown>
-            <Nav.Link href="#" disabled>
-              Link
-            </Nav.Link>
+            {
+              logged ? (<Navbar.Text>
+                Signed in as: <a href="#">{user.username}</a>
+              </Navbar.Text>) : (
+                <NavDropdown title="Log In" id="navbarScrollingDropdown">
+                  <NavDropdown.Item onClick={openLogin}>
+                    Log In
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item onClick={openSignup}>
+                    Sign Up
+                  </NavDropdown.Item>
+                </NavDropdown>
+              )
+            }
           </Nav>
-          <Form className="d-flex">
-            <Form.Control
-              type="search"
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
-            />
-            <Button variant="outline-success">Search</Button>
-          </Form>
+          <Button onClick={openNewPhoto} variant="light">
+            <BiImageAdd style={{ height: "30px", width: "30px" }}></BiImageAdd>
+          </Button>
         </Navbar.Collapse>
       </Container>
-    </Navbar>
+      <LoginModal isOpen={isOpenLogin} show={openLogin} handleClose={() => setOpenLogin(false)}></LoginModal>
+      <SignupModal isOpen={isOpenSignup} show={openSignup} handleClose={() => setOpenSignup(false)}></SignupModal>
+      <NewPhotoModal isOpen={isOpenNewPhoto} show={openNewPhoto} handleClose={() => setOpenNewPhoto(false)}></NewPhotoModal>
+    </Navbar >
   );
 }
 

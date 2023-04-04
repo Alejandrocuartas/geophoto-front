@@ -8,7 +8,7 @@ import App from "./App";
 import { Context } from "./context";
 
 const client = new ApolloClient({
-    uri: `/graphql`,
+    uri: `http://${process.env.API}/query`,
     cache: new InMemoryCache(),
 });
 

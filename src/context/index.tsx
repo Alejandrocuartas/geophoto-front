@@ -1,11 +1,16 @@
 import React, { useState, createContext, useContext } from "react";
-const logContext = createContext<any>(1);
+import { GlobalContext } from "../types";
+//@ts-ignore
+const logContext = createContext<GlobalContext>();
 const Context = ({ children }: { children: JSX.Element }) => {
-    const [logged, setLogged] = useState(true)
+    const [logged, setLogged] = useState(false)
+    const [user, setUser] = useState({ username: "", id: "", jwt: "" })
     return (
         <logContext.Provider value={{
             logged,
-            setLogged
+            setLogged,
+            user,
+            setUser
         }}>
             {children}
         </logContext.Provider>
