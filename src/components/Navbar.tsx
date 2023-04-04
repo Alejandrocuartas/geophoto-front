@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { BiImageAdd } from 'react-icons/Bi'
+import { BiImageAdd } from 'react-icons/bi'
 import { useGlobalState } from '../context';
 
 import './styles/Navbar.css'
