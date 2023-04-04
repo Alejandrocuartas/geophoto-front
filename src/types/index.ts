@@ -33,11 +33,11 @@ type LocationGeo = {
     coordinates: number[];
 };
 
-type NewPhoto = {
+export type NewPhoto = {
     url: string;
     lat: string;
     long: string;
-    userId: string;
+    userId?: string;
 };
 
 export type GlobalContext = {
