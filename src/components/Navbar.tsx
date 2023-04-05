@@ -36,33 +36,30 @@ const NavBar = () => {
         <Navbar.Brand href="#">
           <img className='brand' src="https://th.bing.com/th/id/OIP.UePFyP0eu2qCIV7W2lUe4wHaHa?pid=ImgDet&rs=1" alt="logo" />
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="navbarScroll" />
-        <Navbar.Collapse id="navbarScroll">
-          <Nav
-            className="me-auto my-2 my-lg-0"
-            style={{ maxHeight: '100px' }}
-            navbarScroll
-          >
-            {
-              logged ? (<Navbar.Text>
-                Signed in as: <a href="#">{user.username}</a>
-              </Navbar.Text>) : (
-                <NavDropdown title="Log In" id="navbarScrollingDropdown">
-                  <NavDropdown.Item onClick={openLogin}>
-                    Log In
-                  </NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item onClick={openSignup}>
-                    Sign Up
-                  </NavDropdown.Item>
-                </NavDropdown>
-              )
-            }
-          </Nav>
-          <Button onClick={openNewPhoto} variant="light">
-            <BiImageAdd style={{ height: "30px", width: "30px" }}></BiImageAdd>
-          </Button>
-        </Navbar.Collapse>
+        <Nav
+          className="me-auto my-2 my-lg-0"
+          style={{ maxHeight: '100px' }}
+          navbarScroll
+        >
+          {
+            logged ? (<Navbar.Text>
+              Signed in as: <a href="#">{user.username}</a>
+            </Navbar.Text>) : (
+              <NavDropdown title="Log In" id="navbarScrollingDropdown">
+                <NavDropdown.Item onClick={openLogin}>
+                  Log In
+                </NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item onClick={openSignup}>
+                  Sign Up
+                </NavDropdown.Item>
+              </NavDropdown>
+            )
+          }
+        </Nav>
+        <Button onClick={openNewPhoto} variant="light">
+          <BiImageAdd style={{ height: "30px", width: "30px" }}></BiImageAdd>
+        </Button>
       </Container>
       <LoginModal isOpen={isOpenLogin} show={openLogin} handleClose={() => setOpenLogin(false)}></LoginModal>
       <SignupModal isOpen={isOpenSignup} show={openSignup} handleClose={() => setOpenSignup(false)}></SignupModal>

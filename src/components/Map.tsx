@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { useGlobalState } from '../context';
 import 'mapbox-gl/dist/mapbox-gl.css';
-
 mapboxgl.accessToken = 'pk.eyJ1IjoiYWxlMzFqbyIsImEiOiJja3U1eHF6c3IwMHdxMnZuejFwZmNpNzZjIn0.SneF3ILRiMT9XjP0ncOiEQ';
 
 const Map = ({ long, lat }: { long: number, lat: number }) => {
@@ -85,7 +84,7 @@ const Map = ({ long, lat }: { long: number, lat: number }) => {
         const map = new mapboxgl.Map({
             //@ts-ignore
             container: mapContainer.current,
-            style: 'mapbox://styles/mapbox/streets-v11',
+            style: 'mapbox://styles/mapbox/dark-v10',
             center: [long, lat], //lng, lat
             zoom: 15
         });

@@ -13,15 +13,21 @@ const Main = () => {
             setPhotos(data.photos)
         }
     })
-    if (error) {
-        alert("Unexpected error: " + error.message)
-        location.reload()
-    }
+
     React.useEffect(() => {
         navigator.geolocation.getCurrentPosition((p) => {
             setLng(p.coords.longitude)
             setLa(p.coords.latitude)
-            Photos({ variables: { lat: p.coords.latitude, long: p.coords.longitude } })
+            Photos({
+                variables: {
+                    lat: p.coords.latitude, long: p.coords.longitude
+                }
+            }).then(res => {
+                if (error) {
+                    alert("Unexpected error: " + error.message)
+                    location.reload()
+                }
+            })
         }, (e) => alert("Error when getting geolocation: " + e.message), {
             enableHighAccuracy: true,
             maximumAge: 30000,
